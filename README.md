@@ -138,3 +138,5 @@ For questions or support, please:
 ---
 
 **Made with ❤️ for Graph Theory learners at NIT Trichy**
+PDF LINK OF THE PROJECT OVERVIEW: https://drive.google.com/drive/folders/12iT0Ck5QG3Aq8ObpbyVsHRyYpn3M46Co?usp=sharing
+

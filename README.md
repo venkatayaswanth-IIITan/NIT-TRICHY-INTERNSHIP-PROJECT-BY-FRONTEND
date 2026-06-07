@@ -1,142 +1,222 @@
-# Graph Theory Foundation Basics - NIT Trichy
+# NIT Trichy Internship Projects — Web Platform
 
-A comprehensive educational web platform for learning Graph Theory, developed as part of an internship project at the National Institute of Technology, Tiruchirappalli (NIT Trichy).
+A unified Flask web platform hosting **two NIT Trichy internship projects** under one server:
 
-## 📚 About
+| Project | Route | Description |
+|---------|-------|-------------|
+| 🤖 AI Content Detector | `/` | XGBoost + TF-IDF model to detect AI-generated text |
+| 📐 Graph Theory Platform | `/graph-theory` | Educational hub for learning Graph Theory |
 
-This project provides a one-stop destination for students and enthusiasts to master Graph Theory concepts. The platform offers a structured learning path with curated resources, video tutorials, practice problems, and an interactive chatbot to help resolve doubts.
-
-## ✨ Features
-
-- **Interactive Navigation**: Side navigation menu with quick access to all resources
-- **Responsive Design**: Mobile-friendly interface that works across all devices
-- **Resource Library**: Handpicked articles, books, and slides for comprehensive learning
-- **Learning Roadmap**: Structured path from basics to advanced Graph Theory concepts
-- **Video Tutorials**: Expert-led video lectures in multiple languages
-- **Practice Problems**: MCQs and Previous Year Questions (PYQs) for exam preparation
-- **AI Chatbot**: Interactive chatbot for quick doubt resolution
-- **Reference Books**: Curated list of beginner-friendly Graph Theory books
-- **Direct Faculty Contact**: Easy access to course instructor information
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- A modern web browser (Chrome, Firefox, Safari, or Edge)
-- No additional dependencies required - this is a static website
-
-### Installation
-
-1. Clone or download this repository:
-```bash
-git clone <repository-url>
-cd NIT-TRICHY-INTERNSHIP-PROJECT-BY-FRONTEND-main
-```
-
-2. Open `index.html` in your web browser:
-   - Double-click the `index.html` file, or
-   - Right-click and select "Open with" → your preferred browser, or
-   - Use a local development server (optional):
-     ```bash
-     # Using Python 3
-     python -m http.server 8000
-     
-     # Using Node.js (http-server)
-     npx http-server
-     ```
-
-3. Navigate to `http://localhost:8000` if using a local server
+---
 
 ## 📁 Project Structure
 
 ```
-NIT-TRICHY-INTERNSHIP-PROJECT-BY-FRONTEND-main/
+AI CONTENT DETECTION/
 │
-├── index.html          # Main HTML file with React components
-├── style.css           # Styling and responsive design
-└── README.md           # Project documentation
+├── app.py                        # Flask server — routes for both projects
+├── train_model.py                # ML training script (run once)
+├── requirements.txt              # Python dependencies
+├── README.md                     # This file
+│
+├── dataset.csv                   # Training data (place here before training)
+│
+├── model/                        # Auto-created after training
+│   ├── xgboost_ai_detector.pkl   # Trained XGBoost model
+│   └── tfidf_vectorizer.pkl      # Fitted TF-IDF vectorizer
+│
+├── templates/
+│   ├── index.html                # AI Content Detector UI
+│   └── graph_theory.html         # Graph Theory Platform UI
+│
+├── static/
+│   ├── css/
+│   │   ├── style.css             # AI Detector styles (dark glassmorphism)
+│   │   └── graph-theory.css      # Graph Theory styles
+│   └── js/
+│       └── app.js                # AI Detector frontend logic
+│
+└── frontend-project/             # Original cloned repo (untouched)
+    ├── index.html
+    ├── style.css
+    ├── README.md
+    └── PROJECT OVERVIEW.pdf
 ```
-
-## 🛠️ Technologies Used
-
-- **HTML5**: Semantic markup structure
-- **CSS3**: Modern styling with responsive design
-- **React 17**: Component-based UI (via CDN)
-- **Babel**: JSX transformation (via CDN)
-- **Vanilla JavaScript**: Interactive features and chatbot functionality
-
-## 🎨 Key Components
-
-### Navigation Menu
-- Toggle-able side navigation with NIT Trichy branding
-- Links to all major sections and external resources
-
-### Content Sections
-- **Home**: Welcome page with project overview
-- **Rough Notes**: Access to study materials on Google Drive
-- **Roadmap**: Structured learning path
-- **Resources**: In-depth notes and articles
-- **Videos**: Video tutorials in different languages
-- **Doubts**: AI-powered doubt resolution
-- **Reference Books**: Recommended reading materials
-- **MCQs/PYQs**: Practice questions from GATE and other exams
-- **Contact**: Faculty information
-
-### Interactive Chatbot
-- Simple AI chatbot for answering Graph Theory questions
-- Real-time message interface
-- Demo responses for common queries
-
-## 📱 Responsive Design
-
-The website is fully responsive and optimized for:
-- Desktop computers (1200px and above)
-- Tablets (768px - 1199px)
-- Mobile devices (below 768px)
-
-## 🎓 Educational Resources
-
-The platform integrates with various external resources:
-- **Google Drive**: For rough notes and study materials
-- **Blogspot**: For detailed roadmaps and resources
-- **MathGPT Pro**: For advanced doubt resolution
-- **GATE Overflow**: For practice questions and PYQs
-
-## 👨‍🏫 Course Instructor
-
-This project is associated with the Computer Science and Engineering Department at NIT Trichy.
-Faculty Contact: [Prof. Pavan](https://www.nitt.edu/home/academics/departments/cse/faculty/pavan/)
-
-## 🤝 Contributing
-
-This is an internship project for NIT Trichy. If you'd like to contribute:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/improvement`)
-3. Commit your changes (`git commit -am 'Add new feature'`)
-4. Push to the branch (`git push origin feature/improvement`)
-5. Create a Pull Request
-
-## 📄 License
-
-© 2025 Graph Theory Pro Level. All rights reserved.
-
-## 🙏 Acknowledgments
-
-- National Institute of Technology, Tiruchirappalli (NIT Trichy)
-- Computer Science and Engineering Department
-- Course Instructor and Mentors
-- All contributors to the Graph Theory educational resources
-
-## 📞 Support
-
-For questions or support, please:
-- Use the integrated chatbot on the website
-- Visit [MathGPT Pro](https://www.mathgptpro.com/) for advanced queries
-- Contact the course instructor through the Contact section
 
 ---
 
-**Made with ❤️ for Graph Theory learners at NIT Trichy**
-PDF LINK OF THE PROJECT OVERVIEW: https://drive.google.com/drive/folders/12iT0Ck5QG3Aq8ObpbyVsHRyYpn3M46Co?usp=sharing
+## 🚀 Quick Start
 
+### 1. Install Python Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Train the AI Model
+
+> ⚠️ Place your `dataset.csv` in the project root first.
+>
+> **Required columns:**
+> | Column | Type | Description |
+> |--------|------|-------------|
+> | `text` | string | The text content |
+> | `label` | int | `0` = Human Written, `1` = AI Generated |
+
+```bash
+python train_model.py
+```
+
+This saves:
+- `model/xgboost_ai_detector.pkl`
+- `model/tfidf_vectorizer.pkl`
+
+### 3. Run the Web App
+
+```bash
+python app.py
+```
+
+Open your browser at **http://127.0.0.1:5000**
+
+---
+
+## 🌐 Routes
+
+| Route | Page |
+|-------|------|
+| `GET /` | AI Content Detector UI |
+| `POST /predict` | Prediction API (JSON) |
+| `GET /status` | Model health check |
+| `GET /graph-theory` | Graph Theory Platform |
+
+---
+
+## 🔌 Prediction API
+
+**Endpoint:** `POST /predict`
+
+**Request:**
+```json
+{ "text": "The text you want to analyze..." }
+```
+
+**Response:**
+```json
+{
+  "prediction": "AI Generated",
+  "is_ai": true,
+  "ai_prob": 94.72,
+  "human_prob": 5.28,
+  "confidence": 94.72
+}
+```
+
+**Error Response:**
+```json
+{ "error": "Text is too short. Please enter at least 20 characters." }
+```
+
+---
+
+## 🧠 Project 1 — AI Content Detector
+
+Detects whether a piece of text was written by a human or generated by AI using a machine learning pipeline.
+
+### Model Details
+
+| Parameter | Value |
+|-----------|-------|
+| Algorithm | XGBoost Classifier |
+| Vectorizer | TF-IDF |
+| Max Features | 10,000 |
+| N-gram Range | (1, 2) |
+| Estimators | 300 |
+| Max Depth | 6 |
+| Learning Rate | 0.1 |
+| Objective | `binary:logistic` |
+| Train/Test Split | 80% / 20% |
+
+### UI Features
+- Dark glassmorphism design with animated gradient orbs
+- Real-time prediction with animated probability bars
+- Human vs AI confidence gauge
+- Character counter + `Ctrl+Enter` keyboard shortcut
+- Full error handling (short text, missing model, network errors)
+- Fully responsive (mobile-friendly)
+
+---
+
+## 📐 Project 2 — Graph Theory Foundation Platform
+
+An educational web platform for mastering Graph Theory, built as part of the NIT Trichy internship.
+
+**Source Repository:** [NIT-TRICHY-INTERNSHIP-PROJECT-BY-FRONTEND](https://github.com/venkatayaswanth-IIITan/NIT-TRICHY-INTERNSHIP-PROJECT-BY-FRONTEND)
+
+### Features
+- Interactive side navigation with NIT Trichy branding
+- Structured learning roadmap (basics → advanced)
+- Curated resources, articles, and reference books
+- Video tutorials in multiple languages
+- GATE MCQs and Previous Year Questions (PYQs)
+- AI-powered chatbot for doubt resolution
+- Direct faculty contact — Prof. Pavan, CSE Dept., NIT Trichy
+- Responsive design for desktop, tablet, and mobile
+
+### Technologies
+- HTML5, CSS3
+- React 17 (via CDN)
+- Babel (JSX transformation via CDN)
+- Vanilla JavaScript
+
+---
+
+## 🔗 Navigation Between Projects
+
+Both projects are cross-linked for seamless navigation:
+
+- **AI Detector page** → Click the **"Graph Theory Platform"** card in the project switcher
+- **Graph Theory page** → Click the **"AI Detector"** pill button (top-right corner)
+- **Graph Theory sidebar** → Bottom link to 🤖 AI Detector
+
+---
+
+## 📦 Requirements
+
+```
+flask>=2.3.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+joblib>=1.3.0
+numpy>=1.24.0
+```
+
+Install with:
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 👨‍💻 Development
+
+The Flask server runs in **debug mode** by default — changes to Python files auto-reload the server. For template/CSS/JS changes, simply refresh the browser.
+
+To run on a specific port:
+```python
+app.run(debug=True, port=8080)
+```
+
+---
+
+## 🎓 Acknowledgements
+
+- **National Institute of Technology, Tiruchirappalli (NIT Trichy)**
+- **Computer Science & Engineering Department**
+- Course Instructor: [Prof. Pavan](https://www.nitt.edu/home/academics/departments/cse/faculty/pavan/)
+- Graph Theory Frontend: [venkatayaswanth-IIITan](https://github.com/venkatayaswanth-IIITan)
+
+---
+
+**Made with ❤️ for NIT Trichy Internship 2025**

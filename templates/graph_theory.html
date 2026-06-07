@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Graph Theory Foundation Basics — NIT Trichy</title>
+  <meta name="description" content="An educational web platform for mastering Graph Theory. Features interactive navigation, curated resources, video tutorials, practice problems, AI chatbot, and structured learning roadmap." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/graph-theory.css') }}" />
+  <style>
+    /* ── Back-to-home pill (NIT Trichy Detector nav) ── */
+    .back-pill {
+      position: fixed; top: 14px; right: 18px; z-index: 9999;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #7c3aed, #06b6d4);
+      color: #fff; font-family: 'Outfit', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      border-radius: 100px; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .back-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(124,58,237,0.5);
+      color: #fff;
+    }
+    .back-pill svg { flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Back to AI Detector ── -->
+  <a href="/" class="back-pill">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    AI Detector
+  </a>
+
+  <!-- ── Hamburger menu ── -->
+  <div id="menu-btn" aria-label="Toggle menu" role="button" tabindex="0" title="Toggle Menu">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <header>
+    <h1>Welcome To Graph Theory Foundation Basics</h1>
+  </header>
+
+  <nav class="side-nav">
+    <div class="logo">
+      <img src="https://nriway.com/img-product/aBi6bUjMM0ipguE0HJE1ksipbzboJjgf.nationa-institute-of-technology-transcripts.png"
+           alt="NITT Logo" style="width: 60px; display: block; margin: 0 auto 10px auto;" />
+      NIT-TRICHY
+    </div>
+    <a href="https://ibb.co/Y7hbc7p4">Home</a>
+    <a href="https://drive.google.com/drive/u/0/mobile/folders/116NepMszG9PejXyaocVDIJXkSH_eJ4tB?usp=sharing">Rough Notes</a>
+    <a href="https://graphtheorynitt.blogspot.com/2025/05/graph-theory-basics-to-z-foundation.html">Roadmap</a>
+    <a href="https://graphtheorynitt.blogspot.com/2025/05/graph-theory-notes-depth.html">Resources</a>
+    <a href="https://graphtheorynitt.blogspot.com/2025/05/video-resources-for-different-languages.html">Videos</a>
+    <a href="https://www.mathgptpro.com/">Doubts</a>
+    <a href="https://graphtheorynitt.blogspot.com/2025/05/reference-books-for-beginners-graph.html">Reference Books</a>
+    <a href="https://gateoverflow.in/questions/mathematics/discrete-mathematics/graph-theory?sort=views">Mcq's/PYQ</a>
+    <a href="https://www.nitt.edu/home/academics/departments/cse/faculty/pavan/">Contact</a>
+    <hr style="border-color:rgba(255,255,255,0.15); margin: 16px 0;" />
+    <a href="/" style="background:linear-gradient(135deg,#7c3aed,#06b6d4); border-radius:8px; color:#fff; text-align:center; font-weight:600;">🤖 AI Detector</a>
+  </nav>
+
+  <div class="banner">
+    <img id="banner-img" src="https://www.nitt.edu/home/students/facilitiesnservices/firstyearcoordinator/IMG_20220728_175343.jpg" alt="NIT Trichy Banner" />
+  </div>
+
+  <main class="container" id="app"></main>
+
+  <div class="chatbot">
+    <div class="chatbot-header">Ask Me Anything!</div>
+    <div class="chatbot-messages" id="chatbot-messages">
+      <div><strong>Bot:</strong> Hi! How can I help you with Graph Theory?</div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbot-input" placeholder="Type your question..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Graph Theory Pro Level · NIT Trichy. All rights reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel">
+    const sections = [
+      { id: 'home',      title: 'Welcome to Graph Theory Pro Level',   text: 'Your one-stop destination to master Graph Theory — from basics to advanced concepts, all in one place.' },
+      { id: 'resources', title: '📚 Resources',                         text: 'Access handpicked articles, books, and slides curated for deep learning.' },
+      { id: 'roadmap',   title: '🗺️ Learning Roadmap',                   text: 'Follow a structured learning path to become a Graph Theory expert, from fundamentals to GATE-level mastery.' },
+      { id: 'videos',    title: '🎥 Video Tutorials',                    text: 'Watch expert-led video tutorials and lectures in multiple languages.' },
+      { id: 'doubts',    title: '💬 Doubts & Discussion',                text: 'Ask and resolve your doubts using MathGPT Pro or our integrated chatbot.' },
+      { id: 'contact',   title: '📞 Contact Faculty',                    text: 'Reach out to Prof. Pavan — CSE Department, NIT Trichy.' }
+    ];
+
+    const Card = ({ id, title, text }) => (
+      <div id={id} className="card">
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </div>
+    );
+
+    const App = () => (
+      <>
+        {sections.map((section) => (
+          <Card key={section.id} {...section} />
+        ))}
+      </>
+    );
+
+    ReactDOM.render(<App />, document.getElementById('app'));
+  </script>
+
+  <script>
+    // Hamburger menu
+    const menuBtn = document.getElementById('menu-btn');
+    const sideNav = document.querySelector('.side-nav');
+    menuBtn.addEventListener('click', () => {
+      sideNav.classList.toggle('closed');
+    });
+
+    // Banner slideshow
+    const bannerImages = [
+      'https://www.nitt.edu/home/students/facilitiesnservices/firstyearcoordinator/IMG_20220728_175343.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/6n-graf.svg/1200px-6n-graf.svg.png',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Petersen_graph.svg/1200px-Petersen_graph.svg.png',
+    ];
+    let currentBanner = 0;
+    const bannerImg = document.getElementById('banner-img');
+    setInterval(() => {
+      currentBanner = (currentBanner + 1) % bannerImages.length;
+      bannerImg.src = bannerImages[currentBanner];
+    }, 4000);
+
+    // Simple chatbot
+    function sendMessage() {
+      const input    = document.getElementById("chatbot-input");
+      const messages = document.getElementById("chatbot-messages");
+      if (input.value.trim() === "") return;
+      messages.innerHTML += `<div><strong>You:</strong> ${input.value}</div>`;
+
+      const q = input.value.toLowerCase();
+      let response;
+      if (q.includes("graph"))         response = "Graphs are mathematical structures used to model pairwise relations between objects.";
+      else if (q.includes("tree"))      response = "A tree is a connected acyclic graph. It has n-1 edges for n vertices.";
+      else if (q.includes("bfs"))       response = "BFS (Breadth-First Search) explores all neighbours at the present depth before moving deeper.";
+      else if (q.includes("dfs"))       response = "DFS (Depth-First Search) explores as far as possible along each branch before backtracking.";
+      else if (q.includes("dijkstra"))  response = "Dijkstra's algorithm finds the shortest path in a weighted graph with non-negative edges.";
+      else                              response = "Great question! Try visiting the Resources or Doubts section for detailed answers.";
+
+      messages.innerHTML += `<div><strong>Bot:</strong> ${response}</div>`;
+      input.value = "";
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    // Allow Enter key in chatbot
+    document.getElementById('chatbot-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>

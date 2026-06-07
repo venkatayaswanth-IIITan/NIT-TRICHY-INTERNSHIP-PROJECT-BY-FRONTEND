@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome To Graph Theory Basics</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="menu-btn" aria-label="Toggle menu" role="button" tabindex="0" title="Toggle Menu">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <header>
+    <h1> Welcome To Graph Theory Foundation Basics</h1>
+  </header>
+
+  <nav class="side-nav">
+    <div class="logo">
+      <img src="https://nriway.com/img-product/aBi6bUjMM0ipguE0HJE1ksipbzboJjgf.nationa-institute-of-technology-transcripts.png" alt="NITT Logo" style="width: 60px; display: block; margin: 0 auto 10px auto;" />
+      NIT-TRICHY
+    </div>
+    <a href="https://ibb.co/Y7hbc7p4">Home</a>
+    <a href="https://drive.google.com/drive/u/0/mobile/folders/116NepMszG9PejXyaocVDIJXkSH_eJ4tB?usp=sharing">Rough Notes</a>
+    <a href="https://graphtheorynitt.blogspot.com/2025/05/graph-theory-basics-to-z-foundation.html">Roadmap</a>
+    <a href="https://graphtheorynitt.blogspot.com/2025/05/graph-theory-notes-depth.html">Resources</a>
+    <a href="https://graphtheorynitt.blogspot.com/2025/05/video-resources-for-different-languages.html">Videos</a>
+    <a href="https://www.mathgptpro.com/">Doubts</a>
+    <a href="https://graphtheorynitt.blogspot.com/2025/05/reference-books-for-beginners-graph.html">Reference Books</a>
+    <a href="https://gateoverflow.in/questions/mathematics/discrete-mathematics/graph-theory?sort=views">Mcq's/PYQ</a>
+    <a href="https://www.nitt.edu/home/academics/departments/cse/faculty/pavan/">Contact</a>
+
+  </nav>
+
+  <div class="banner">
+    <img  src="https://www.nitt.edu/home/students/facilitiesnservices/firstyearcoordinator/IMG_20220728_175343.jpg" alt="Banner">
+  </div>
+
+  
+
+  <main class="container" id="app"></main>
+
+  <div class="chatbot">
+    <div class="chatbot-header">Ask Me Anything!</div>
+    <div class="chatbot-messages" id="chatbot-messages">
+      <div><strong>Bot:</strong> Hi! How can I help you with Graph Theory?</div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbot-input" placeholder="Type your question..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Graph Theory Pro Level. All rights reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel">
+    const sections = [
+      { id: 'home', title: 'Welcome to Graph Theory Pro Level', text: 'Your one-stop destination to master Graph Theory.' },
+      { id: 'resources', title: 'Resources', text: 'Access handpicked articles, books, and slides.' },
+      { id: 'roadmap', title: 'Roadmap', text: 'Follow a structured learning path to become a Graph Theory expert.' },
+      { id: 'videos', title: 'Videos', text: 'Watch expert-led video tutorials and lectures.' },
+      { id: 'doubts', title: 'Doubts', text: 'Ask and resolve your doubts in our discussion forum.' },
+      { id: 'contact', title: 'Contact', text: 'Reach out to us at graphpro@education.com' }
+    ];
+
+    const Card = ({ id, title, text }) => (
+      <div id={id} className="card">
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </div>
+    );
+
+    const App = () => (
+      <>
+        {sections.map((section) => (
+          <Card key={section.id} {...section} />
+        ))}
+      </>
+    );
+
+    ReactDOM.render(<App />, document.getElementById('app'));
+  </script>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const sideNav = document.querySelector('.side-nav');
+
+    menuBtn.addEventListener('click', () => {
+      sideNav.classList.toggle('closed');
+    });
+
+    // Banner image slideshow
+    const bannerImages = [
+      'https://via.placeholder.com/1200x400?text=Graph+Theory+1',
+      'https://via.placeholder.com/1200x400?text=Graph+Theory+2',
+      'https://via.placeholder.com/1200x400?text=Graph+Theory+3',
+      'https://via.placeholder.com/1200x400?text=Graph+Theory+4',
+      'https://via.placeholder.com/1200x400?text=Graph+Theory+5'
+    ];
+    let currentBanner = 0;
+    const bannerImg = document.getElementById('banner-img');
+    setInterval(() => {
+      currentBanner = (currentBanner + 1) % bannerImages.length;
+      bannerImg.src = bannerImages[currentBanner];
+    }, 3000);
+
+    // Simple chatbot
+    function sendMessage() {
+      const input = document.getElementById("chatbot-input");
+      const messages = document.getElementById("chatbot-messages");
+      if (input.value.trim() === "") return;
+      const userMessage = `<div><strong>You:</strong> ${input.value}</div>`;
+      messages.innerHTML += userMessage;
+
+      let response;
+      if (input.value.toLowerCase().includes("graph")) {
+        response = "Graphs are mathematical structures used to model pairwise relations between objects.";
+      } else {
+        response = "I'm here to help! (This is a demo bot.)";
+      }
+
+      const botResponse = `<div><strong>Bot:</strong> ${response}</div>`;
+      messages.innerHTML += botResponse;
+      input.value = "";
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
+</body>
+</html>

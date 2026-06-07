@@ -10,12 +10,12 @@ venv/
 env/
 .venv/
 
-# Trained model files (large binaries — run train_model.py to regenerate)
-model/
-*.pkl
-
-# Dataset (may contain sensitive data)
+# Dataset (may contain sensitive data — add manually if needed)
 dataset.csv
+
+# NOTE: model/*.pkl files are intentionally NOT ignored
+# so they can be committed and deployed to Vercel.
+# Run train_model.py locally, then: git add model/ && git push
 
 # Flask / dev
 instance/
@@ -34,3 +34,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Vercel local dev
+.vercel
